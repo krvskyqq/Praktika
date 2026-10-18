@@ -160,6 +160,13 @@ class ManagerTests(unittest.TestCase):
         self.m.path.write_text('{"not_contacts": 5}', encoding='utf-8')
         self.assertTrue(ContactManager(self.path).warning)
 
+    def test_invalid_utf8_quarantine(self):
+        self.m.path.write_bytes(b'\xff\xfe\x00broken')
+        m = ContactManager(self.path)
+        self.assertTrue(m.warning)
+        backups = list((self.path / 'backups').glob('corrupt-*.json'))
+        self.assertEqual(backups[0].read_bytes(), b'\xff\xfe\x00broken')
+
     def test_save_failure_rolls_back(self):
         c = self.add()
         before = self.m.path.read_bytes()

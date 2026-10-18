@@ -91,8 +91,8 @@ class ContactManager:
         if not self.path.exists():
             return
         # Ошибки доступа не означают повреждение базы и передаются вызывающему коду.
-        raw = self.path.read_text(encoding='utf-8')
         try:
+            raw = self.path.read_text(encoding='utf-8')
             contacts = self._decode(json.loads(raw))
             keys, ids = set(), set()
             for c in contacts:
