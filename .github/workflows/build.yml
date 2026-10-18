@@ -67,4 +67,4 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           VERSION="build-${GITHUB_RUN_NUMBER}"
-          gh release create "$VERSION" --target "$GITHUB_SHA" --title "Менеджер контактов $VERSION" --notes "Сборки Windows x64 и Linux x64. Модульные тесты и самопроверка GUI пройдены на обеих платформах." artifacts/ContactManager-windows-x64.zip artifacts/ContactManager-linux-x64.tar.gz artifacts/ContactManager.exe
+          gh release create "$VERSION" --target "$GITHUB_SHA" --title "Менеджер контактов $VERSION" --notes "Сборки Windows x64 и Linux x64. Модульные тесты и самопроверка GUI пройдены на обеих платформах." artifacts/ContactManager-windows-x64.zip artifacts/ContactManager-linux-x64.tar.gz artifacts/dist/ContactManager.exe
