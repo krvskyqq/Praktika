@@ -1,0 +1,5 @@
+[
+  {"name":"Деканат","phone":"+7 (900) 000-00-01","email":"dean@example.com","category":"Учеба","notes":"Вымышленная запись для проверки поиска"},
+  {"name":"Преподаватель информатики","phone":"+7 (900) 000-00-02","email":"teacher@example.com","category":"Преподаватели","notes":"Вымышленная запись"},
+  {"name":"John Smith","phone":"+7 (900) 000-00-03","email":"john@example.com","category":"Личное","notes":"Проверка английского имени"}
+]
