@@ -1,0 +1,33 @@
+name: Capture report screenshots
+on:
+  push:
+    branches: [report-screenshots]
+    paths:
+      - tools/capture_screenshots.py
+      - .github/workflows/screenshots.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  capture:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y xvfb openbox python3-tk
+      - run: python -m pip install pillow
+      - name: Capture real GUI scenarios
+        run: xvfb-run -a -s '-screen 0 1360x900x24' bash -c 'openbox >/tmp/openbox.log 2>&1 & python tools/capture_screenshots.py'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: report-screenshots
+          path: docs/screenshots/*.png
+      - name: Save reproducible screenshots
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/screenshots
+          git commit -m 'Добавить снимки реальной работы приложения для отчета'
+          git push
