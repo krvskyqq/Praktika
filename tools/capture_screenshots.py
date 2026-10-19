@@ -17,7 +17,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 
 def capture(root, name):
-    root.update_idletasks()
+    root.update()
     time.sleep(.25)
     x, y = root.winfo_rootx(), root.winfo_rooty()
     ImageGrab.grab(bbox=(x-3, y-27, x+root.winfo_width()+3, y+root.winfo_height()+3)).save(OUT / name)
@@ -90,3 +90,4 @@ with tempfile.TemporaryDirectory(prefix='contact-report-') as tmp:
 
 assert len(list(OUT.glob('*.png'))) == 9
 print('Captured 9 real application screenshots')
+
